@@ -17,38 +17,50 @@ import './index.css'
 //   return React.createElement('h1', {}, 'hello world')
 // }
 
+// setup vars
+const books = [
+  {
+    id: 1,
+    img:
+      'https://images-na.ssl-images-amazon.com/images/I/41aIidpbKwL._AC_SX184_.jpg',
+    title: 'The Body: A Guide for Occupants',
+    author: 'Bill Bryson'
+  },
+  {
+    id: 2,
+    img:
+      'https://images-na.ssl-images-amazon.com/images/I/51LV5uH7NmL._AC_SX184_.jpg',
+    title: 'To Sleep In a Sea of Stars',
+    author: 'Christopher Paolini'
+  },
+  {
+    id: 3,
+    img:
+      'https://images-na.ssl-images-amazon.com/images/I/51B-BOBtQtL._AC_SX184_.jpg',
+    title: 'Humans',
+    author: 'Brandon Stanton'
+  }
+]
+
 function BookList() {
   return (
     <section className='booklist'>
-      <Book />
-      <Book />
-      <Book />
-      <Book />
-      <Book />
-      <Book />
-      <Book />
+      {books.map((book) => {
+        return <Book key={book.id} {...book} />
+      })}
     </section>
   )
 }
 
-const Book = () => {
+const Book = ({ img, title, author }) => {
+  // const { img, title, author } = props
   return (
     <article className='book'>
-      <Image />
-      <Title />
-      <Author />
+      <img src={img} alt='' />
+      <h1>{title}</h1>
+      <h4>{author}</h4>
     </article>
   )
 }
-
-const Image = () => (
-  <img
-    src='https://images-na.ssl-images-amazon.com/images/I/41aIidpbKwL._AC_SX184_.jpg'
-    alt=''
-  />
-)
-
-const Title = () => <h1>The Body: A Guide for Occupants</h1>
-const Author = () => <h4>Bill Bryson</h4>
 
 ReactDom.render(<BookList />, document.getElementById('root'))
